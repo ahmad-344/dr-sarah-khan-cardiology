@@ -3,7 +3,7 @@ import { dbFetchSettings, dbSaveSettings } from '../lib/db';
 import { isSupabaseConfigured } from '../lib/supabase';
 
 const LS_KEY = 'dr_sarah_admin_settings';
-const ADMIN_PASSWORD = 'admin@2026';
+const ADMIN_PASSWORD = 'admin@2025';
 
 export interface AdminSettings {
   blockedDates: string[];
