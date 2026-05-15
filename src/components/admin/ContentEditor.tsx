@@ -33,7 +33,7 @@ const ContentEditor: React.FC<ContentEditorProps> = ({ settings, saving, onSave 
         cur = cur[parts[i]] as Record<string, unknown>;
       }
       cur[parts[parts.length - 1]] = value;
-      return next as SiteSettings;
+      return next as unknown as SiteSettings;
     });
   };
 
