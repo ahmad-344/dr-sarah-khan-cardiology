@@ -1,174 +1,265 @@
-# Dr. Sarah Khan — Interventional Cardiologist Portfolio Website
+# 🏥 Dr. Sarah Khan — Interventional Cardiologist Portfolio
 
-Premium, fully functional cardiologist portfolio with appointment booking system, admin panel, specialty detail pages, and patient management.
+> A full-stack, production-ready medical portfolio and appointment booking platform built with React, TypeScript, and Supabase. Features a complete patient booking flow, real-time slot management, PDF generation, and a comprehensive admin panel.
 
----
-
-## PC Setup — 3 Commands
-
-### Requirements
-- Node.js 18+ → Download: https://nodejs.org (LTS version)
-
-### Steps
-
-```bash
-# 1. Go into project folder
-cd dr-sarah-khan
-
-# 2. Install dependencies (first time only — takes 1-2 minutes)
-npm install
-
-# 3. Start development server
-npm run dev
-```
-
-Open browser: **http://localhost:5173**
-
-### Production Build
-```bash
-npm run build
-npm run preview
-```
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-4-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 
 ---
 
-## Admin Panel
+## 🌐 Live Demo
 
-URL: **http://localhost:5173/#admin**
-
-Password: **admin@2025**
-
-Admin panel features:
-- Dashboard with today's appointments & revenue
-- Calendar to block/unblock specific dates
-- Block individual time slots per date
-- View & cancel all appointments
-- Toggle online booking on/off
+| Link | URL |
+|------|-----|
+| 🔗 Website | [dr-sarah-khan.vercel.app](https://dr-sarah-khan.vercel.app) |
+| 🔐 Admin Panel | `yoursite.vercel.app/#admin` — Password: `admin@2025` |
 
 ---
 
-## Project Structure
+## 📸 Screenshots
+
+> Hero section, booking wizard, admin dashboard, and PDF confirmation all in one polished UI.
+
+---
+
+## ✨ Features
+
+### 👤 Patient Side
+| Feature | Description |
+|---------|-------------|
+| 🗓️ Appointment Booking | 4-step wizard: type → date → time → patient details |
+| ⏱️ Real-time Slots | Booked slots marked instantly without page reload |
+| 📋 My Appointments | Phone-based lookup — view, cancel, reschedule |
+| 📄 PDF Confirmation | Download appointment with doctor photo, badge, details |
+| 📅 Calendar Export | Google Calendar direct link + Apple/Outlook .ics file |
+| 🏥 6 Specialty Pages | Detailed pages for each medical specialty |
+| 🗺️ Google Maps | Embedded hospital location map |
+| 📱 Fully Responsive | Works perfectly on mobile, tablet, and desktop |
+
+### 🔧 Admin Panel (`/#admin`)
+| Feature | Description |
+|---------|-------------|
+| 📊 Dashboard | Date selector — view any day's appointments with color-coded statuses |
+| ✅ Status Management | Pending → Confirmed → Completed / Not Arrived (full flow) |
+| 🤖 Auto Status | Appointments auto-escalate when time passes without action |
+| 📆 Availability | Block specific dates or time slots for any date |
+| ✏️ Content Editor | Edit ALL website content from admin — no code needed |
+| 🔄 Real-time Sync | Admin changes reflect on website instantly via Supabase Realtime |
+| 🔒 Password Protected | Secure login with configurable password |
+| 📈 Stats | Total bookings, pending, confirmed, revenue tracking |
+
+### 📝 Content Editor (Admin → Content Tab)
+Everything on the website is editable from the admin panel:
+- Doctor name, title, tagline, experience, education, awards, memberships
+- Contact info, phone, email, address, Google Maps URL
+- Clinic hours (weekdays, Saturday, Sunday, emergency)
+- Consultation fees (all 4 types)
+- Services / Specialties titles and descriptions
+- Patient reviews and ratings
+- Insurance providers list
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology | Purpose |
+|----------|-----------|---------|
+| Frontend | React 18 + TypeScript | UI components and type safety |
+| Bundler | Vite 4 | Fast dev server and build |
+| Styling | Tailwind CSS 3 | Utility-first responsive design |
+| Database | Supabase (PostgreSQL) | Appointments, settings, content storage |
+| Realtime | Supabase Realtime | Live updates across browser tabs |
+| PDF | jsPDF 2 + HTML Canvas | Appointment confirmation PDFs |
+| State | React Context + Hooks | Global settings, local state |
+| Hosting | Vercel | Zero-config deployment |
+
+---
+
+## 📁 Project Structure
 
 ```
 dr-sarah-khan/
 ├── public/
-│   ├── favicon.svg
-│   └── images/               ← Put 3 images here
-│       ├── doctor-profile.jpg
-│       ├── doctor-about.jpg
-│       └── hospital-exterior.jpg
+│   └── images/
+│       ├── doctor-profile.jpg     ← Hero circle photo
+│       ├── doctor-about.jpg       ← About section photo
+│       └── hospital-exterior.jpg  ← Hospital section
 ├── src/
-│   ├── assets/svgs/
-│   │   └── Icons.tsx          ← All SVG icons (30+)
 │   ├── components/
+│   │   ├── admin/
+│   │   │   └── ContentEditor.tsx  ← Full website content editor
 │   │   ├── layout/
-│   │   │   ├── Navbar.tsx     ← Sticky nav, scroll-highlight, mobile
-│   │   │   └── Footer.tsx     ← Emergency banner, links
+│   │   │   ├── Navbar.tsx         ← Sticky nav with scroll highlight
+│   │   │   └── Footer.tsx         ← Dynamic footer with all contact info
 │   │   ├── sections/
-│   │   │   ├── Hero.tsx
-│   │   │   ├── QuickInfoBar.tsx
-│   │   │   ├── About.tsx
-│   │   │   ├── Specialties.tsx       ← Learn More → detail page
-│   │   │   ├── SpecialtyDetail.tsx   ← Full page per specialty
-│   │   │   ├── AppointmentsBooking.tsx ← 4-step wizard
-│   │   │   ├── MyAppointments.tsx    ← Cancel/reschedule
-│   │   │   ├── PatientInfo.tsx       ← FAQ accordion
-│   │   │   ├── Testimonials.tsx
-│   │   │   └── HospitalInfo.tsx      ← Real Google Maps
+│   │   │   ├── Hero.tsx           ← Landing section
+│   │   │   ├── About.tsx          ← Doctor credentials
+│   │   │   ├── Specialties.tsx    ← 6 specialty cards
+│   │   │   ├── AppointmentsBooking.tsx  ← 4-step booking wizard
+│   │   │   ├── MyAppointments.tsx ← Patient portal
+│   │   │   ├── Testimonials.tsx   ← Patient reviews
+│   │   │   └── HospitalInfo.tsx   ← Location + Google Maps
 │   │   └── ui/
-│   │       ├── Calendar.tsx          ← Custom calendar (admin-aware)
-│   │       ├── TimeSlotPicker.tsx    ← Admin-aware time slots
-│   │       └── ConfirmationCard.tsx  ← PDF download
-│   ├── data/
-│   │   ├── constants.ts       ← All static data & fees
-│   │   └── specialtyDetails.ts ← Rich content for 6 specialties
+│   │       ├── Calendar.tsx       ← Custom calendar (admin-aware)
+│   │       ├── TimeSlotPicker.tsx ← Live slot availability
+│   │       └── ConfirmationCard.tsx ← Booking confirmation + PDF
 │   ├── hooks/
-│   │   ├── useAppointments.ts  ← localStorage CRUD
-│   │   └── useAdminSettings.ts ← Admin availability management
+│   │   ├── useAppointments.ts     ← CRUD + Supabase sync
+│   │   ├── useAdminSettings.ts    ← Availability management
+│   │   └── useSiteSettings.ts     ← Content + Realtime subscription
+│   ├── lib/
+│   │   ├── supabase.ts            ← Supabase client
+│   │   └── db.ts                  ← All database operations
 │   ├── pages/
-│   │   ├── AdminPanel.tsx     ← Password-protected admin
+│   │   ├── AdminPanel.tsx         ← Full admin dashboard
 │   │   ├── PrivacyPolicy.tsx
 │   │   └── TermsOfService.tsx
-│   ├── types/index.ts
-│   ├── utils/helpers.ts
-│   ├── App.tsx                ← Router (home/specialty/admin/privacy/terms)
-│   ├── main.tsx
-│   └── index.css
-├── index.html
-├── package.json
-├── tailwind.config.js
-├── vite.config.ts
-└── tsconfig.json
+│   ├── types/                     ← TypeScript interfaces
+│   └── utils/
+│       ├── helpers.ts             ← Date/time helpers
+│       └── generatePDF.ts         ← PDF generation with canvas
+├── supabase-schema.sql            ← Run this in Supabase SQL editor
+├── .env.example                   ← Copy to .env and add your keys
+└── README.md
 ```
 
 ---
 
-## Images — Leonardo AI Prompts
+## 🚀 Getting Started
 
-Put all 3 images in: **public/images/**
+### Prerequisites
+- **Node.js 18+** → [nodejs.org](https://nodejs.org)
+- **Supabase account** → [supabase.com](https://supabase.com) (free tier works)
 
-### 1. doctor-profile.jpg — Hero section circle
-
-**Prompt:**
+### 1. Clone the Repository
+```bash
+git clone https://github.com/ahmad-344/dr-sarah-khan-cardiology.git
+cd dr-sarah-khan-cardiology
 ```
-Professional Pakistani female cardiologist doctor, mid 40s, 
-wearing pristine white medical coat, stethoscope around neck, 
-warm confident smile, looking directly at camera, 
-soft professional studio lighting, clean white background, 
-sharp focus, photorealistic, 8K, clinical headshot
+
+### 2. Install Dependencies
+```bash
+npm install
 ```
-**Ratio:** 1:1 (1024×1024px)
-**File:** `public/images/doctor-profile.jpg`
+
+### 3. Set Up Supabase Database
+1. Create a new project on [supabase.com](https://supabase.com)
+2. Go to **SQL Editor** → **New Query**
+3. Copy the contents of `supabase-schema.sql` and run it
+4. Go to **Project Settings** → **API** and copy:
+   - Project URL
+   - anon/public key
+
+### 4. Configure Environment Variables
+```bash
+cp .env.example .env
+```
+Open `.env` and fill in:
+```env
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key-here
+```
+
+### 5. Run Development Server
+```bash
+npm run dev
+```
+Open **http://localhost:5173**
+
+### 6. Access Admin Panel
+Go to **http://localhost:5173/#admin**
+Password: `admin@2025`
 
 ---
 
-### 2. doctor-about.jpg — About section
+## 🌍 Deploying to Vercel
 
-**Prompt:**
+### Option A — Via Vercel Dashboard (Recommended)
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) → **New Project**
+3. Import your GitHub repository
+4. Add environment variables:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+5. Click **Deploy**
+
+### Option B — Via CLI
+```bash
+npm install -g vercel
+vercel
 ```
-South Asian female doctor in her mid 40s sitting at modern 
-hospital consultation desk, reviewing cardiac reports on tablet, 
-white medical coat, natural clinical lighting, warm expression, 
-modern hospital interior, 3/4 portrait, photorealistic, 4K
-```
-**Ratio:** 4:3 (1200×900px)
-**File:** `public/images/doctor-about.jpg`
+Follow the prompts — Vercel auto-detects Vite.
+
+### Build Settings (auto-detected)
+| Setting | Value |
+|---------|-------|
+| Framework | Vite |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+| Install Command | `npm install` |
 
 ---
 
-### 3. hospital-exterior.jpg — Hospital Info section
+## 🔐 Appointment Status Flow
 
-**Prompt:**
 ```
-Modern private hospital building exterior in Islamabad Pakistan, 
-contemporary glass and white architecture, clean entrance, 
-manicured garden, blue sky, golden hour light, 
-professional architectural photography, 4K
+Patient books
+     ↓
+  PENDING  ──── time passes without action ──→  NOT CONFIRMED
+     ↓ admin confirms
+  CONFIRMED ─── patient doesn't show ─────────→  NOT ARRIVED
+     ↓ patient arrives
+  COMPLETED
+
+  Any status ──── admin cancels ──────────────→  CANCELLED
 ```
-**Ratio:** 16:9 (1600×900px)
-**File:** `public/images/hospital-exterior.jpg`
+
+| Status | Color | Meaning |
+|--------|-------|---------|
+| 🔴 Pending | Red | New booking, awaiting admin confirmation |
+| 🟢 Confirmed | Green | Admin confirmed the appointment |
+| 🔵 Completed | Blue | Patient visited, appointment done |
+| 🟡 Not Arrived | Amber | Patient didn't show up |
+| 🔴 Not Confirmed | Red | Time passed without confirmation |
+| ⬛ Cancelled | Grey | Cancelled by patient or admin |
 
 ---
 
-## Features Completed
+## ⚙️ Customization
 
-- [x] Sticky Navbar with scroll-based section highlighting
-- [x] Hero section with animated floating icons
-- [x] Quick info bar
-- [x] About section with credentials, awards, memberships
-- [x] 6 Specialty cards → each opens full detail page with conditions, procedures, FAQs
-- [x] 4-step appointment booking wizard with validation
-- [x] Custom calendar (reads admin blocked dates)
-- [x] Time slot picker (reads admin blocked times)
-- [x] Appointment confirmation with PDF download (jsPDF)
-- [x] Add to Calendar (.ics file)
-- [x] My Appointments — view, cancel, reschedule
-- [x] Patient Info FAQ accordion
-- [x] Testimonials with rating breakdown
-- [x] Real Google Maps iframe
-- [x] Admin Panel (password: admin@2025) — block dates, time slots, view all bookings
-- [x] Privacy Policy page
-- [x] Terms of Service page
-- [x] Mobile responsive everywhere
-- [x] Phone: +92-319-0539976 throughout
-- [x] All SVG icons (no emojis)
+### Change Admin Password
+Open `src/hooks/useAdminSettings.ts` → Line 6:
+```ts
+const ADMIN_PASSWORD = 'admin@2025'; // ← Change this
+```
+
+### Update Doctor Information
+Go to **Admin Panel → Content Tab** — no code needed.
+All content is editable from the UI and saves to the database.
+
+### Add Your Own Images
+Replace these files in `public/images/`:
+- `doctor-profile.jpg` — 1:1 ratio, for the hero circle
+- `doctor-about.jpg` — 4:3 ratio, for the about section
+- `hospital-exterior.jpg` — 16:9 ratio, for hospital section
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and deploy for personal and commercial projects.
+
+---
+
+## 👨‍💻 Built By
+
+**Ahmad** — Full-stack developer  
+📧 contactahmad.services@gmail.com  
+🐙 [github.com/ahmad-344](https://github.com/ahmad-344)
+
+---
+
+*Built with ❤️ using React + TypeScript + Supabase*
