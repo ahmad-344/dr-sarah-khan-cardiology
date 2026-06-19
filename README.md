@@ -14,7 +14,7 @@
 
 | Link | URL |
 |------|-----|
-| 🔗 Website | [dr-sarah-khan.vercel.app](https://dr-sarah-khan.vercel.app) |
+| 🔗 Website | [dr-sarah-khan.vercel.app](https://dr-sarah-khan-cardiology.vercel.app/) |
 | 🔐 Admin Panel | `yoursite.vercel.app/#admin` — Password: `admin@2025` |
 
 ---
